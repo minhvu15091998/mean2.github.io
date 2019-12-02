@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-content white-text">
+                <div class="row">
+                    <div class="col s5">
+                        <form  #bookForm="ngForm" (ngSubmit)="onSubmit(bookForm)">
+                            <input type="hidden" name="_id" #_id ="ngModel" [(ngModel)]="bookService.selectedBook._id">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input type="text" name="tenSach" #name ="ngModel" [(ngModel)]="bookService.selectedBook.tenSach" placeholder="Enter full book name">
+                                   
+                                </div>
+                            </div>
+                            <div class="row">
+                                    <div class="input-field col s12">
+                                        <input type="text" name="tacGia" #name ="ngModel" [(ngModel)]="bookService.selectedBook.tacGia" placeholder="Enter full authur name">
+                                      
+                                    </div>
+                            </div>
+                            <div class="row">
+                                    <div class="input-field col s12">
+                                        <input type="text" name="giaBan" #name ="ngModel" [(ngModel)]="bookService.selectedBook.giaBan" placeholder="Enter full price">
+                                        
+                                    </div>
+                            </div>
+                            <div class="row">
+                                    <div class="input-field col s12">
+                                      <button class="btn btn-custom right" type="button" (click)="resetForm(bookForm)">Reset</button>
+                                      <button class="btn btn-custom right" type="submit" [disabled]="!bookForm.valid">Submit</button>
+                                    </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col s7">
+                        <table class="responsive-table highlight" style="color: black;">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Tên Sách</th>
+                                    <th>Tác Giả</th>
+                                    <th>Giá Bán</th>
+                                    <th>Buy</th>
+                                 
+                                </tr>
+                            </thead>
+                            <tr *ngFor = 'let book of bookService.books'>
+                                <td><img src="{{ book.imgSach }}" style="width: 80px;height: 80px;" alt=""></td>
+                                <td>{{book.tenSach}}</td>
+                                <td>{{book.tacGia}}</td>
+                                <td>{{book.giaBan}}</td>
+                                <td>
+                                    <a class="action-btn"  (click)= "onEdit(book)">  
+                                        <i class="material-icons" style="color: blue;">edit</i>
+                                    </a>
+                                    <a class="action-btn" (click) = "onDelete(book._id,bookForm)">
+                                        <i class="material-icons" style="color: red;">delete</i>
+                                    </a>
+                                </td>
+                                
+                            </tr>
+                        </table>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
